@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.itheima.mapper.UserMapper">
+<select id="selectUser" resultType="com.itheima.pojo.User">
+    select id, username, password, create_time, update_time from questionnaire_star.user
+    <where>
+    <if test="username!=null">
+        username=#{username}
+    </if>
+        <if test="password!=null">
+            and password=#{password}
+    </if>
+    </where>
+</select>
+<insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+    insert into questionnaire_star.user (username,password,create_Time,update_Time)
+            values (#{username},#{password},#{createTime},#{updateTime})
+</insert>
+<select id="selectQns" resultType="com.itheima.pojo.Questionnaire">
+    select id,qn_title,qn_id ,user_id from questionnaire_star.tb_questionnaire
+    <where>
+        <if test="userId!=null">
+        user_id=#{userId}
+        </if>
+        <if test="qnTitle!=null">
+        and qn_title=#{qnTitle}
+</if>
+    </where>
+</select>
+</mapper>
